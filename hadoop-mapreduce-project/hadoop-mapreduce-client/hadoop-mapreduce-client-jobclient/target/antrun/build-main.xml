@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <mkdir dir="E:\open-source-projects\big-data\hadoop\hadoop-2.8.5-src\hadoop-mapreduce-project\hadoop-mapreduce-client\hadoop-mapreduce-client-jobclient\target/test-dir"/>
+  <mkdir dir="E:\open-source-projects\big-data\hadoop\hadoop-2.8.5-src\hadoop-mapreduce-project\hadoop-mapreduce-client\hadoop-mapreduce-client-jobclient\target/test-dir"/>
+</target>
+</project>

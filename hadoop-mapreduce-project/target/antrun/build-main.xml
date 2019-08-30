@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main" if="tar">
+  <echo file="E:\open-source-projects\big-data\hadoop\hadoop-2.8.5-src\hadoop-mapreduce-project\target/dist-maketar.sh">cd &quot;E:\open-source-projects\big-data\hadoop\hadoop-2.8.5-src\hadoop-mapreduce-project\target&quot;
+                  tar cf - hadoop-mapreduce-2.8.5 | gzip &gt; hadoop-mapreduce-2.8.5.tar.gz</echo>
+  <exec dir="E:\open-source-projects\big-data\hadoop\hadoop-2.8.5-src\hadoop-mapreduce-project\target" executable="bash" failonerror="true">
+    <arg line="./dist-maketar.sh"/>
+  </exec>
+</target>
+</project>
