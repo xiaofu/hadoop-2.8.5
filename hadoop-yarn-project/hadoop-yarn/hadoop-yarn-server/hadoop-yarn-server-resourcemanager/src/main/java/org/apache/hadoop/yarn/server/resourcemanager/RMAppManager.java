@@ -328,6 +328,7 @@ public class RMAppManager implements EventHandler<RMAppManagerEvent>,
       ApplicationSubmissionContext submissionContext, long submitTime,
       String user, boolean isRecovery) throws YarnException {
     // Do queue mapping
+	  //如果指定队列映射规则，重新将APP映射到指定的队列
     if (!isRecovery) {
       if (rmContext.getQueuePlacementManager() != null) {
         // We only do queue mapping when it's a new application
@@ -391,7 +392,7 @@ public class RMAppManager implements EventHandler<RMAppManagerEvent>,
             .newResourceRequest(RMAppAttemptImpl.AM_CONTAINER_PRIORITY,
                 ResourceRequest.ANY, submissionContext.getResource(), 1);
       }
-
+      //AMReq使用提交上下文的标签表达式
       // set label expression for AM container
       if (null == amReq.getNodeLabelExpression()) {
         amReq.setNodeLabelExpression(submissionContext

@@ -701,7 +701,7 @@ public class CommonNodeLabelsManager extends AbstractService {
     for (Entry<NodeId, Set<String>> entry : replaceLabelsToNode.entrySet()) {
       NodeId nodeId = entry.getKey();
       Set<String> labels = entry.getValue();
-      
+      // 每个Host只能打一个标签！！！这处2.6版本差别太大了，也相当于把问题减化了
       // As in YARN-2694, we disable user add more than 1 labels on a same host
       if (labels.size() > 1) {
         String msg = String.format("%d labels specified on host=%s"

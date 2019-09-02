@@ -457,7 +457,7 @@ public class ApplicationMasterService extends AbstractService implements
               blacklistRequest.getBlacklistRemovals() : Collections.EMPTY_LIST;
       RMApp app =
           this.rmContext.getRMApps().get(applicationId);
-      
+      //只有ANY类型的资源请求才添加标签表达式！！
       // set label expression for Resource Requests if resourceName=ANY 
       ApplicationSubmissionContext asc = app.getApplicationSubmissionContext();
       for (ResourceRequest req : ask) {

@@ -405,7 +405,8 @@ public abstract class RMContainerRequestor extends RMCommunicator {
       addResourceRequest(req.priority, rack, req.capability,
           null);
     }
-
+    //这里很重要的一点，只有off-switch才添加了标签表达式，WHY?只有off-swith才表达了随机可放，那么指定标签表达式才有意义，而像node-local，rack-local等
+    //都是明确的范围或目的地，所以不能加标签表达式固定在某些机器上
     // Off-switch
     addResourceRequest(req.priority, ResourceRequest.ANY, req.capability,
         req.nodeLabelExpression);

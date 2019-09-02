@@ -401,7 +401,7 @@ public class ParentQueue extends AbstractCSQueue {
       }
       return CSAssignment.NULL_ASSIGNMENT;
     }
-    
+    //TODO：没理解意思，后面再看
     // Check if this queue need more resource, simply skip allocation if this
     // queue doesn't need more resources.
     if (!super.hasPendingResourceRequest(node.getPartition(),

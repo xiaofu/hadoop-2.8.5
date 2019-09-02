@@ -131,6 +131,7 @@ public abstract class AbstractNodeLabelsProvider extends AbstractService
     if (null == partitionNodeLabel) {
       return null;
     }
+    //可以看到这里我每个节点只支持一个标签，并且是排他的！
     Set<NodeLabel> labels = new HashSet<NodeLabel>();
     labels.add(NodeLabel.newInstance(partitionNodeLabel));
     return labels;

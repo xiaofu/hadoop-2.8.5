@@ -196,12 +196,15 @@ public class SchedulerUtils {
             maximumResource, incrementResource);
     ask.setCapability(normalized);
   }
-
+  /**
+         *前提：资源请求没有带标签各表达式，只有资源请求名为*时才使用队列的标签表达式，其它的资源请求都使用NO_LABEL！
+   * @param resReq
+   * @param queueInfo
+   */
   private static void normalizeNodeLabelExpressionInRequest(
       ResourceRequest resReq, QueueInfo queueInfo) {
 
     String labelExp = resReq.getNodeLabelExpression();
-
     // if queue has default label expression, and RR doesn't have, use the
     // default label expression of queue
     if (labelExp == null && queueInfo != null && ResourceRequest.ANY
@@ -302,6 +305,7 @@ public class SchedulerUtils {
           + ", maxVirtualCores=" + maximumResource.getVirtualCores());
     }
     String labelExp = resReq.getNodeLabelExpression();
+    // 非*资源名请求如果指定了标签表达式是不允许的。
     // we don't allow specify label expression other than resourceName=ANY now
     if (!ResourceRequest.ANY.equals(resReq.getResourceName())
         && labelExp != null && !labelExp.trim().isEmpty()) {
@@ -388,7 +392,14 @@ public class SchedulerUtils {
     }
     return null;
   }
-  
+  /**
+   * SchedulingMode.RESPECT_PARTITION_EXCLUSIVITY模式下如果节点有标签，那么资源请求也要带相应的标签才有机会在此节点调度;如果节点没有标签，那么资源请求也不要带标签才有机会在此节点调度
+   * SchedulingMode.IGNORE_PARTITION_EXCLUSIVITY模式下，忽略了当前节点的标签，也即认为此节点无标签，那么只有资源请求也不带标签才有机会在此节点调度.
+   * @param requestedPartition
+   * @param nodePartition
+   * @param schedulingMode
+   * @return
+   */
   public static boolean checkResourceRequestMatchingNodePartition(
       String requestedPartition, String nodePartition,
       SchedulingMode schedulingMode) {
