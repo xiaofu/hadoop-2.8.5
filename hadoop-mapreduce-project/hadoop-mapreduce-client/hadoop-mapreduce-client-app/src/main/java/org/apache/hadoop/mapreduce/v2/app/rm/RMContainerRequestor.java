@@ -392,6 +392,7 @@ public abstract class RMContainerRequestor extends RMCommunicator {
   
   protected void addContainerReq(ContainerRequest req) {
     // Create resource requests
+	// 为了尽可能调度，假如一个分片有3复本，那么就有3个host，那么就会创建三个不同的资源请求！一旦资源分配后，AM告诉RM删除多余的资源请求
     for (String host : req.hosts) {
       // Data-local
       if (!isNodeBlacklisted(host)) {
@@ -399,7 +400,7 @@ public abstract class RMContainerRequestor extends RMCommunicator {
             null);
       }
     }
-
+    //使用默认的拓朴结构配置，肯定有DEFAULT_RACK
     // Nothing Rack-local for now
     for (String rack : req.racks) {
       addResourceRequest(req.priority, rack, req.capability,
